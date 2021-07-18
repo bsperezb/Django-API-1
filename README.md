@@ -16,6 +16,7 @@ python3 -m venv env
 ```
 2 - <a name="step-2">Activate the environment</a>
 <p> On linux </p>
+
 ```bash
 source env/bin/activate
 ```
@@ -24,6 +25,7 @@ source env/bin/activate
 ```bash
 env/bin/activate.bat
 ```
+
 
 3 - <a name="step-3">Install the project basic dependencies </a>
 
