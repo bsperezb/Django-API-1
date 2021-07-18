@@ -19,6 +19,20 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets
 from django.shortcuts import get_object_or_404 
 
+#generic ViewSet con mixings
+class GenericAPIViewSet(viewsets.GenericViewSet, mixins.ListModelMixin,
+	mixins.CreateModelMixin, mixins.UpdateModelMixin, mixins.RetrieveModelMixin,
+	mixins.DestroyModelMixin):
+
+	serializer_class = ArticleSerializer
+	queryset = Article.objects.all()
+
+
+
+
+
+
+#View set
 class ArticleViewSet(viewsets.ViewSet):
 	def list(self, request):
 		articles = Article.objects.all()
@@ -51,7 +65,7 @@ class ArticleViewSet(viewsets.ViewSet):
 
 
 
-
+#Generic APIViews---------------
 class GenericAPIView(generics.GenericAPIView, mixins.ListModelMixin,
 	mixins.CreateModelMixin, mixins.UpdateModelMixin, 
 	mixins.RetrieveModelMixin, mixins.DestroyModelMixin):
@@ -83,7 +97,7 @@ class GenericAPIView(generics.GenericAPIView, mixins.ListModelMixin,
 
 
 
-
+# ApiView------------------
 class ArticleAPIView(APIView):
 	
 	def get(self, request):
@@ -98,8 +112,6 @@ class ArticleAPIView(APIView):
 			serializer.save()
 			return Response(serializer.data, status=status.HTTP_201_CREATED)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
 class ArticleDetails(APIView):
 
 	def get_object(self, id):
@@ -130,9 +142,7 @@ class ArticleDetails(APIView):
 
 
 
-
-
-
+#Visatas Basadas en funciones----------
 @api_view(['GET', 'POST'])
 def article_list(request):
 
