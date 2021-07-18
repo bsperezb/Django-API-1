@@ -19,6 +19,14 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets
 from django.shortcuts import get_object_or_404 
 
+#modelviewset
+class ArticleModleViewSet(viewsets.ModelViewSet):
+	serializer_class = ArticleSerializer
+	queryset = Article.objects.all()
+
+
+
+
 #generic ViewSet con mixings
 class GenericAPIViewSet(viewsets.GenericViewSet, mixins.ListModelMixin,
 	mixins.CreateModelMixin, mixins.UpdateModelMixin, mixins.RetrieveModelMixin,
